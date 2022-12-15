@@ -16,15 +16,17 @@ Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
 const corsOptions = {
-  origin: 'https://wpp.delbosque.com.br',
-  methods: '*',
+  origin: "https://wpp.delbosque.com.br",
   optionsSuccessStatus: 200,
-  preflightContinue: false,
-}
+  preflightContinue: true
+};
 
-app.headers.set("Access-Control-Allow-Origin", "https://wpp.delbosque.com.br");
+app.use(cors(corsOptions));
 
-app.use(cors());
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 
 app.use(cookieParser());
 app.use(express.json());
