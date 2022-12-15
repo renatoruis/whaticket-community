@@ -16,7 +16,7 @@ Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
 const corsOptions = {
-  origin: ["https://wpp.delbosque.com.br", "http://localhost"],
+  origin: ["https://wpp.delbosque.com.br", "http://localhost:3000"],
   optionsSuccessStatus: 200,
   preflightContinue: true,
   credentials: true
