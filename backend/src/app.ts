@@ -16,18 +16,13 @@ Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
 const corsOptions = {
-  origin: "https://wpp.delbosque.com.br",
+  origin: "*",
   optionsSuccessStatus: 200,
   preflightContinue: true,
   credentials: true
 };
 
 app.use(cors(corsOptions));
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   next();
-// });
 
 app.use(cookieParser());
 app.use(express.json());
