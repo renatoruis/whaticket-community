@@ -15,8 +15,13 @@ import { logger } from "./utils/logger";
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
+const corsOptions = {
+  origin: 'https://wpp.delbosque.com.br',
+  methods: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());
