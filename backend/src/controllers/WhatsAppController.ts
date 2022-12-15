@@ -20,12 +20,19 @@ interface WhatsappData {
 }
 
 export const index = async (req: Request, res: Response): Promise<Response> => {
+  if (req.user.profile !== "admin") {
+    throw new AppError("ERR_NO_PERMISSION", 403);
+  }
+
   const whatsapps = await ListWhatsAppsService();
 
   return res.status(200).json(whatsapps);
 };
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
+  if (req.user.profile !== "admin") {
+    throw new AppError("ERR_NO_PERMISSION", 403);
+  }
   const {
     name,
     status,
@@ -63,6 +70,9 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
 };
 
 export const show = async (req: Request, res: Response): Promise<Response> => {
+  if (req.user.profile !== "admin") {
+    throw new AppError("ERR_NO_PERMISSION", 403);
+  }
   const { whatsappId } = req.params;
 
   const whatsapp = await ShowWhatsAppService(whatsappId);
@@ -74,6 +84,9 @@ export const update = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  if (req.user.profile !== "admin") {
+    throw new AppError("ERR_NO_PERMISSION", 403);
+  }
   const { whatsappId } = req.params;
   const whatsappData = req.body;
 
@@ -102,6 +115,9 @@ export const remove = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  if (req.user.profile !== "admin") {
+    throw new AppError("ERR_NO_PERMISSION", 403);
+  }
   const { whatsappId } = req.params;
 
   await DeleteWhatsAppService(whatsappId);
