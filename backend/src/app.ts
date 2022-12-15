@@ -22,7 +22,9 @@ const corsOptions = {
   preflightContinue: false,
 }
 
-app.use(cors(corsOptions));
+app.headers.set("Access-Control-Allow-Origin", "https://wpp.delbosque.com.br");
+
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());
