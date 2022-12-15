@@ -8,10 +8,11 @@ let io: SocketIO;
 export const initIO = (httpServer: Server): SocketIO => {
 
   const corsOptions = {
-    origin: '*',
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+    origin: ["https://wpp.delbosque.com.br", "http://localhost:3000"],
+    optionsSuccessStatus: 200,
+    preflightContinue: true,
+    credentials: true
+  };
 
   io = new SocketIO(httpServer, {
     cors: corsOptions
