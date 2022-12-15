@@ -17,7 +17,8 @@ export const initIO = (httpServer: Server): SocketIO => {
     cors: corsOptions
   });
 
-  io = new SocketIO(httpServer);
+  // io = new SocketIO(httpServer);
+
   io.on("connection", socket => {
     logger.info("Client Connected");
     socket.on("joinChatBox", (ticketId: string) => {
