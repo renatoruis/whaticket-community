@@ -19,6 +19,10 @@ interface WhatsappData {
 }
 
 export const index = async (req: Request, res: Response): Promise<Response> => {
+  if (req.user.profile !== "admin") {
+    throw new AppError("ERR_NO_PERMISSION", 403);
+  }
+
   const whatsapps = await ListWhatsAppsService();
 
   return res.status(200).json(whatsapps);
