@@ -18,7 +18,8 @@ const app = express();
 const corsOptions = {
   origin: 'https://wpp.delbosque.com.br',
   methods: '*',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200,
+  preflightContinue: false,
 }
 
 app.use(cors(corsOptions));
