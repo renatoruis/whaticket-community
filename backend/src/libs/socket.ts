@@ -6,11 +6,17 @@ import { logger } from "../utils/logger";
 let io: SocketIO;
 
 export const initIO = (httpServer: Server): SocketIO => {
-  // io = new SocketIO(httpServer, {
-  //   cors: {
-  //     origin: "*" //process.env.FRONTEND_URL
-  //   }
-  // });
+
+  const corsOptions = {
+    origin: '*',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
+  app.use(cors(corsOptions));
+  io = new SocketIO(httpServer, {
+    cors: corsOptions
+  });
 
   io = new SocketIO(httpServer);
   io.on("connection", socket => {

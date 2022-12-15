@@ -2,7 +2,7 @@ import "./bootstrap";
 import "reflect-metadata";
 import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
-// import cors from "cors";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import * as Sentry from "@sentry/node";
 
@@ -15,13 +15,14 @@ import { logger } from "./utils/logger";
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
+const corsOptions = {
+  origin: '*',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
-// app.use(
-//   cors({
-//     credentials: false,
-//     origin: "*" //process.env.FRONTEND_URL
-//   })
-// );
+app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(Sentry.Handlers.requestHandler());
