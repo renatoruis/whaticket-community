@@ -6,12 +6,13 @@ import { logger } from "../utils/logger";
 let io: SocketIO;
 
 export const initIO = (httpServer: Server): SocketIO => {
-  io = new SocketIO(httpServer, {
-    cors: {
-      origin: "*" //process.env.FRONTEND_URL
-    }
-  });
+  // io = new SocketIO(httpServer, {
+  //   cors: {
+  //     origin: "*" //process.env.FRONTEND_URL
+  //   }
+  // });
 
+  io = new SocketIO(httpServer);
   io.on("connection", socket => {
     logger.info("Client Connected");
     socket.on("joinChatBox", (ticketId: string) => {
