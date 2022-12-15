@@ -15,13 +15,8 @@ import { logger } from "./utils/logger";
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
-const corsOptions = {
-  origin: '*',
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());
