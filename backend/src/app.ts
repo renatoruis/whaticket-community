@@ -18,7 +18,8 @@ const app = express();
 const corsOptions = {
   origin: "https://wpp.delbosque.com.br",
   optionsSuccessStatus: 200,
-  preflightContinue: true
+  preflightContinue: true,
+  credentials: true
 };
 
 app.use(cors(corsOptions));
